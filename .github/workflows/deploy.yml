@@ -1,0 +1,44 @@
+# .github/workflows/deploy.yml
+name: Deploy Nuxt.js to GitHub Pages
+
+# Eventos que disparan este workflow
+on:
+  push:
+    branches:
+      - main # Se ejecutará cada vez que se haga un push a la rama 'main'
+
+# Permisos necesarios para que el workflow pueda escribir en el repositorio de GitHub Pages
+permissions:
+  contents: write # Permite al workflow escribir archivos en el repositorio
+  pages: write   # Permite al workflow desplegar a GitHub Pages
+  id-token: write # Necesario para OIDC (OpenID Connect) con Pages
+
+# Trabajos a ejecutar
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Ejecutar en una máquina virtual de Ubuntu
+
+    steps:
+      # Paso 1: Checkout del código
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Paso 2: Configurar Node.js (asegúrate que la versión coincida con tu proyecto)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Puedes usar 18, 20 o la que prefieras/necesites
+
+      # Paso 3: Instalar dependencias de Nuxt
+      - name: Install Dependencies
+        run: npm install # O yarn install, pnpm install
+
+      # Paso 4: Generar el sitio estático de Nuxt
+      - name: Build Nuxt.js Static Site
+        run: npm run generate # Este comando crea la carpeta 'dist' (o 'output/public')
+
+      # Paso 5: Desplegar el sitio generado a GitHub Pages
+      # Este paso usa una action oficial de GitHub para Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Action oficial para desplegar en Pages
