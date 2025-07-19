@@ -1,140 +1,80 @@
 <template>
-    <div class="contact-container">
-      <h1>Contáctanos</h1>
-      <p>Estamos listos para hacer realidad tu próximo proyecto.</p>
-      <form @submit.prevent="submitForm" class="contact-form">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input type="text" id="name" v-model="form.name" required>
+  <div class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <main class="container mx-auto px-6 py-12 md:py-24 flex flex-col items-center">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+          Contáctanos
+        </h1>
+        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+          ¿Listo para dar el siguiente paso? Déjanos un mensaje y nos pondremos en contacto contigo lo antes posible.
+        </p>
+      </div>
+
+      <form @submit.prevent="submitForm" class="w-full max-w-lg bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+        <div class="space-y-6">
+          <div>
+            <label for="name" class="form-label">Nombre Completo</label>
+            <input type="text" id="name" v-model="form.name" class="form-input" placeholder="Tu Nombre" required>
+          </div>
+          
+          <div>
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" id="email" v-model="form.email" class="form-input" placeholder="tu@email.com" required>
+          </div>
+          
+          <div>
+            <label for="message" class="form-label">Tu Mensaje</label>
+            <textarea id="message" v-model="form.message" rows="5" class="form-input" placeholder="Cuéntanos sobre tu proyecto o idea..." required></textarea>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="form.email" required>
+
+        <div class="mt-8">
+          <button type="submit" class="w-full button-primary">
+            Enviar Mensaje
+          </button>
         </div>
-        <div class="form-group">
-          <label for="message">Mensaje:</label>
-          <textarea id="message" v-model="form.message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="submit-button">Enviar Mensaje</button>
       </form>
-      <NuxtLink to="/" class="back-home">Volver al Inicio</NuxtLink>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  
-  const form = ref({
-    name: '',
-    email: '',
-    message: ''
-  });
-  
-  const submitForm = () => {
-    alert(`Mensaje enviado:\nNombre: ${form.value.name}\nEmail: ${form.value.email}\nMensaje: ${form.value.message}`);
-    // Aquí integrarías la lógica real para enviar el formulario
-    // Por ejemplo, usando un servicio de terceros como Formspree, Netlify Forms, o un endpoint de API
-    form.value = { name: '', email: '', message: '' }; // Limpiar formulario
-  };
-  
-  useHead({
-    title: 'Contacto - Forkode Team',
-    meta: [
-      { name: 'description', content: 'Ponte en contacto con Forkode Team para tus proyectos de desarrollo de software.' }
-    ]
-  })
-  </script>
-  
-  <style scoped>
-  .contact-container {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #f8f8f8;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  h1 {
-    color: #2c3e50;
-    font-size: 2.5em;
-    margin-bottom: 15px;
-  }
-  
-  p {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 30px;
-  }
-  
-  .contact-form {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-  }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: auto;
-    display: block;
-    margin-top: 20px;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-  
-  .back-home {
-    display: inline-block;
-    margin-top: 30px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .back-home:hover {
-    color: #0056b3;
-  }
-  </style>
+
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+// Importamos el componente Navbar para poder usarlo en el template
+
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+});
+
+const submitForm = () => {
+  // La lógica del formulario se mantiene igual
+  alert(`Mensaje enviado:\nNombre: ${form.value.name}\nEmail: ${form.value.email}\nMensaje: ${form.value.message}`);
+  form.value = { name: '', email: '', message: '' };
+};
+
+useHead({
+  title: 'Contacto - ForKode',
+  meta: [
+    { name: 'description', content: 'Ponte en contacto con ForKode para dar vida a tus proyectos de software y diseño con talento emergente de Costa Rica.' }
+  ]
+})
+</script>
+
+<style>
+/* 2. Definimos estilos reutilizables para el formulario con @apply */
+.form-label {
+  @apply block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200;
+}
+.form-input {
+  @apply block w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
+}
+
+/* 3. Reutilizamos la clase global del botón del proyecto */
+.button-primary {
+  @apply inline-block w-full px-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 dark:focus:ring-offset-gray-800 focus:ring-blue-500 transition-all duration-200;
+}
+</style>

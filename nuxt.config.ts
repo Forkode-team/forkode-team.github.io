@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     // buildAssetsDir: '/_nuxt/',
   },
   devtools: { enabled: true },
-  modules: [],
+  modules: [
+    '@nuxtjs/tailwindcss'
+  ],
   css: [],
   postcss: {
     plugins: {
